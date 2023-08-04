@@ -34,13 +34,11 @@ router.get("/comics", async (req, res) => {
     let comics = response.data;
     comics = _.orderBy(comics.results, ["title"], ["desc"]);
     // console.log(comics);
-    res
-      .status(200)
-      .json({
-        count: response.data.count,
-        limit: response.data.limit,
-        results: [comics],
-      });
+    res.status(200).json({
+      count: response.data.count,
+      limit: response.data.limit,
+      results: comics,
+    });
   } catch (error) {
     res.status(500).json({ message: error.response });
   }
