@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const _ = require("lodash");
 
 router.get("/comics", async (req, res) => {
   try {
@@ -28,9 +29,12 @@ router.get("/comics", async (req, res) => {
     }
 
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics${query}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics${query}&sort=asc`
     );
-    res.status(200).json(response.data);
+    let comics = response.data.results;
+    comics = _.orderBy(comics, ["title"], ["desc"]);
+    // console.log(comics);
+    res.status(200).json(comics);
   } catch (error) {
     res.status(500).json({ message: error.response });
   }
