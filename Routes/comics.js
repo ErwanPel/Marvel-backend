@@ -31,10 +31,16 @@ router.get("/comics", async (req, res) => {
     const response = await axios.get(
       `https://lereacteur-marvel-api.herokuapp.com/comics${query}&sort=asc`
     );
-    let comics = response.data.results;
-    comics = _.orderBy(comics, ["title"], ["desc"]);
+    let comics = response.data;
+    comics = _.orderBy(comics.results, ["title"], ["desc"]);
     // console.log(comics);
-    res.status(200).json(comics);
+    res
+      .status(200)
+      .json({
+        count: response.data.count,
+        limit: response.data.limit,
+        results: [comics],
+      });
   } catch (error) {
     res.status(500).json({ message: error.response });
   }
