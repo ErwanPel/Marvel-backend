@@ -4,16 +4,17 @@ const axios = require("axios");
 
 router.get("/characters", async (req, res) => {
   try {
-    const { name, limit, skip } = req.query;
+    const { name, page } = req.query;
     let filters = { apiKey: process.env.APIKEY };
+
+    console.log(req.query);
 
     if (name) {
       filters["name"] = name;
     }
-    if (limit) {
-      filters["limit"] = limit;
-    }
-    if (skip) {
+
+    if (page) {
+      const skip = (page - 1) * 100;
       filters["skip"] = skip;
     }
 

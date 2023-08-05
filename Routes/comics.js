@@ -5,16 +5,15 @@ const _ = require("lodash");
 
 router.get("/comics", async (req, res) => {
   try {
-    const { title, limit, skip } = req.query;
+    const { title, page } = req.query;
     let filters = { apiKey: process.env.APIKEY };
 
     if (title) {
       filters["title"] = title;
     }
-    if (limit) {
-      filters["limit"] = limit;
-    }
-    if (skip) {
+
+    if (page) {
+      const skip = (page - 1) * 100;
       filters["skip"] = skip;
     }
 
