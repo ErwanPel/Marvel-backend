@@ -4,10 +4,19 @@ const app = express();
 const axios = require("axios");
 const cors = require("cors");
 
+const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGODB_URL);
+
 const charactersRoute = require("./Routes/characters");
 const comicsRoute = require("./Routes/comics");
+const userRoutes = require("./Routes/user");
 
-app.use(cors()).use(charactersRoute).use(comicsRoute);
+app
+  .use(express.json())
+  .use(cors())
+  .use(charactersRoute)
+  .use(comicsRoute)
+  .use(userRoutes);
 
 app.get("/", (req, res) => {
   try {
