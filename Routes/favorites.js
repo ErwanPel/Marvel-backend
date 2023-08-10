@@ -3,6 +3,7 @@ const router = express.Router();
 const isAuthenticated = require("../Middleware/isAuthenticated");
 
 const Favorite = require("../Models/Favorite");
+const { find } = require("lodash");
 
 router.get("/favorites", isAuthenticated, async (req, res) => {
   try {
@@ -60,12 +61,18 @@ router.post("/favorites", isAuthenticated, async (req, res) => {
           findFavorite.markModified("characters");
           await findFavorite.save();
           console.log(findFavorite);
-          return res.status(200).json(findFavorite);
+          return res
+            .status(200)
+            .json({ message: "the favorite character is create" });
         } else {
-          throw {
-            status: 200,
-            message: "the favorite is already in the database",
-          };
+          findFavorite.characters.splice(
+            findFavorite.characters.indexOf(req.body.characters),
+            1
+          );
+
+          findFavorite.markModified("comics");
+          findFavorite.save();
+          res.status(200).json({ message: "the favorite character is delete" });
         }
       } else {
         console.log("nouveau comics");
@@ -74,48 +81,13 @@ router.post("/favorites", isAuthenticated, async (req, res) => {
           findFavorite.markModified("comics");
           await findFavorite.save();
           console.log(findFavorite);
-          return res.status(200).json(findFavorite);
+          return res
+            .status(200)
+            .json({ message: "the favorite comic is create" });
         } else {
-          throw {
-            status: 200,
-            message: "the favorite is already in the database",
-          };
-        }
-      }
-    }
-  } catch (error) {
-    res.status(error.status || 500).json(error.message);
-  }
-});
-
-router.delete("/favorites", isAuthenticated, async (req, res) => {
-  try {
-    console.log("query", req.query.characters);
-    const findFavorite = await Favorite.findOne({ owner: req.token._id });
-    console.log(findFavorite);
-    if (findFavorite) {
-      if (req.query.characters) {
-        console.log(findFavorite.characters.indexOf(req.query.characters));
-        if (findFavorite.characters.indexOf(req.query.characters) === -1) {
-          throw { status: 400, message: "no ID is find for this character" };
-        } else {
-          findFavorite.characters.splice(
-            findFavorite.characters.indexOf(req.query.characters),
-            1
-          );
-
-          findFavorite.markModified("characters");
-          findFavorite.save();
-          res.status(200).json({ message: "the favorite character is delete" });
-        }
-      } else {
-        console.log("delete comics");
-        console.log(findFavorite.comics.indexOf(req.query.comics));
-        if (findFavorite.comics.indexOf(req.query.comics) === -1) {
-          throw { status: 400, message: "no ID is find for this comic" };
-        } else {
+          console.log("present", findFavorite);
           findFavorite.comics.splice(
-            findFavorite.comics.indexOf(req.query.comics),
+            findFavorite.comics.indexOf(req.body.comics),
             1
           );
 
@@ -124,11 +96,6 @@ router.delete("/favorites", isAuthenticated, async (req, res) => {
           res.status(200).json({ message: "the favorite comic is delete" });
         }
       }
-    } else {
-      throw {
-        status: 200,
-        message: "the user doesn't have favorite in the database",
-      };
     }
   } catch (error) {
     res.status(error.status || 500).json(error.message);
