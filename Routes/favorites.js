@@ -40,7 +40,9 @@ router.post("/favorites", isAuthenticated, async (req, res) => {
         });
         console.log(FavoriteToCreate);
         await FavoriteToCreate.save();
-        return res.status(200).json(FavoriteToCreate);
+        return res
+          .status(200)
+          .json({ message: "the favorite is add in the database" });
       } else {
         const FavoriteToCreate = await Favorite({
           characters: [],
@@ -49,7 +51,9 @@ router.post("/favorites", isAuthenticated, async (req, res) => {
         });
         console.log(FavoriteToCreate);
         await FavoriteToCreate.save();
-        return res.status(200).json(FavoriteToCreate);
+        return res
+          .status(200)
+          .json({ message: "the favorite is add in the database" });
       }
     } else {
       if (req.body.characters) {
@@ -60,7 +64,9 @@ router.post("/favorites", isAuthenticated, async (req, res) => {
           findFavorite.markModified("characters");
           await findFavorite.save();
           console.log(findFavorite);
-          return res.status(200).json(findFavorite);
+          return res
+            .status(200)
+            .json({ message: "the favorite is add in the database" });
         } else {
           throw {
             status: 200,
@@ -74,7 +80,9 @@ router.post("/favorites", isAuthenticated, async (req, res) => {
           findFavorite.markModified("comics");
           await findFavorite.save();
           console.log(findFavorite);
-          return res.status(200).json(findFavorite);
+          return res
+            .status(200)
+            .json({ message: "the favorite is add in the database" });
         } else {
           throw {
             status: 200,
