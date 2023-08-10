@@ -39,7 +39,7 @@ router.get("/comics", async (req, res) => {
       results: comics,
     });
   } catch (error) {
-    res.status(500).json({ message: error.response });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -50,7 +50,7 @@ router.get("/comics/:characterId", async (req, res) => {
     );
     res.status(200).json(response.data);
   } catch (error) {
-    res.status(500).json({ message: error.response });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -61,7 +61,7 @@ router.get("/comic/:comicId", async (req, res) => {
     );
     res.status(200).json(response.data);
   } catch (error) {
-    res.status(500).json({ message: error.response });
+    res.status(500).json({ message: error.message });
   }
 });
 

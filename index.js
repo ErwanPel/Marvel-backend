@@ -10,13 +10,15 @@ mongoose.connect(process.env.MONGODB_URL);
 const charactersRoute = require("./Routes/characters");
 const comicsRoute = require("./Routes/comics");
 const userRoutes = require("./Routes/user");
+const FavoriteRoutes = require("./Routes/favorites");
 
 app
   .use(express.json())
   .use(cors())
   .use(charactersRoute)
   .use(comicsRoute)
-  .use(userRoutes);
+  .use(userRoutes)
+  .use(FavoriteRoutes);
 
 app.get("/", (req, res) => {
   try {

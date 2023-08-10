@@ -34,7 +34,7 @@ router.get("/characters", async (req, res) => {
 
     res.status(200).json(response.data);
   } catch (error) {
-    res.status(500).json({ message: error.response });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -46,7 +46,7 @@ router.get("/character/:characterId", async (req, res) => {
     console.log(response.data);
     res.status(200).json(response.data);
   } catch (error) {
-    res.status(500).json({ message: error.response });
+    res.status(500).json({ message: error.message });
   }
 });
 
