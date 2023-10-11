@@ -32,7 +32,7 @@ router.get("/characters", async (req, res) => {
       `https://lereacteur-marvel-api.herokuapp.com/characters${query}`
     );
 
-    res.status(200).json(response.data);
+    res.status(200).json(nameList);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
