@@ -25,6 +25,7 @@ router.get("/favorites", isAuthenticated, async (req, res) => {
 });
 
 router.post("/favorites", isAuthenticated, async (req, res) => {
+  console.log(req.body);
   try {
     const findFavorite = await Favorite.findOne({ owner: req.token._id });
 
@@ -104,9 +105,8 @@ router.post("/favorites", isAuthenticated, async (req, res) => {
 
 router.delete("/favorites", isAuthenticated, async (req, res) => {
   try {
-    console.log("query", req.query.characters);
     const findFavorite = await Favorite.findOne({ owner: req.token._id });
-    console.log(findFavorite);
+
     if (findFavorite) {
       if (req.query.characters) {
         const searchFav = findFavorite.characters.findIndex(

@@ -13,7 +13,26 @@ const userRoutes = require("./Routes/user");
 const FavoriteRoutes = require("./Routes/favorites");
 
 app
-  .use(express.json())
+  .use(function (req, res, next) {
+    res.setHeader(
+      "Report-To",
+      '{"group":"csp-endpoint","max_age":10886400,"endpoints":[{"url":"https://site--marvel-backend--fwddjdqr85yq.code.run/__cspreport__"}],"include_subdomains":true},  { "group": "hpkp-endpoint","max_age": 10886400,"endpoints": [{ "url": "https://site--marvel-backend--fwddjdqr85yq.code.run/__hpkpreport__" }] }'
+    );
+    req.setHeader(
+      "Content-Security-Policy",
+      "default-src 'self' https://site--marvel-backend--fwddjdqr85yq.code.run/; font-src 'self' https://fonts.gstatic.com/; img-src 'self' http://i.annihil.us; script-src 'self'; style-src 'self' 'sha256-Evgf5Vl6C3X3/0d5WiBHe2Tmq2ZdlVQYhfTiePNAXgY=' https://fonts.googleapis.com/ 'sha256-m9C3ibQ7/MuOKw17/yE5bYRuDJAxyp9QzejqJPbEqos='; frame-src 'self'"
+    );
+    next();
+  })
+  .use(
+    express.json({
+      type: [
+        "application/json",
+        "application/csp-report",
+        "application/reports+json",
+      ],
+    })
+  )
   .use(cors())
   .use(charactersRoute)
   .use(comicsRoute)
