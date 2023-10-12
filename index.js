@@ -20,7 +20,7 @@ app
     );
     req.setHeader(
       "Content-Security-Policy",
-      "default-src 'self' https://site--marvel-backend--fwddjdqr85yq.code.run/; font-src 'self' https://fonts.gstatic.com/; img-src 'self' http://i.annihil.us; script-src 'self'; style-src 'self' 'sha256-Evgf5Vl6C3X3/0d5WiBHe2Tmq2ZdlVQYhfTiePNAXgY=' https://fonts.googleapis.com/ 'sha256-m9C3ibQ7/MuOKw17/yE5bYRuDJAxyp9QzejqJPbEqos='; frame-src 'self'"
+      "default-src 'self' https://marvel-scss.netlify.app/; font-src 'self' https://fonts.gstatic.com/; img-src 'self' http://i.annihil.us; script-src 'self'; style-src 'self' 'sha256-Evgf5Vl6C3X3/0d5WiBHe2Tmq2ZdlVQYhfTiePNAXgY=' https://fonts.googleapis.com/ 'sha256-m9C3ibQ7/MuOKw17/yE5bYRuDJAxyp9QzejqJPbEqos='; frame-src 'self'"
     );
     next();
   })
