@@ -7,8 +7,6 @@ router.get("/characters", async (req, res) => {
     const { name, page } = req.query;
     let filters = { apiKey: process.env.APIKEY };
 
-    console.log(req.query);
-
     if (name) {
       filters["name"] = name;
     }

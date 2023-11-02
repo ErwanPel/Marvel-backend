@@ -12,7 +12,7 @@ const client = mailgun.client({
 router.post("/portfolio", async (req, res) => {
   try {
     const { name, email, message } = req.body;
-    console.log(req.body);
+
     const messageData = {
       from: `${name} <${email}>`,
       to: process.env.MAILGUN_USERMAIL,

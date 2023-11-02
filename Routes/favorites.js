@@ -25,7 +25,6 @@ router.get("/favorites", isAuthenticated, async (req, res) => {
 });
 
 router.post("/favorites", isAuthenticated, async (req, res) => {
-  console.log(req.body);
   try {
     const findFavorite = await Favorite.findOne({ owner: req.token._id });
 
@@ -57,7 +56,6 @@ router.post("/favorites", isAuthenticated, async (req, res) => {
     } else {
       // If the body contain a key belong to the character "name"
       if (req.body.name) {
-        console.log("new character");
         const searchFav = findFavorite.characters.findIndex(
           (fav) => fav._id === req.body._id
         );
@@ -66,12 +64,10 @@ router.post("/favorites", isAuthenticated, async (req, res) => {
         if (searchFav === -1) {
           findFavorite.characters.push(req.body);
           findFavorite.markModified("characters");
-          console.log(findFavorite);
 
           await findFavorite.save();
           res.status(200).json(findFavorite);
         } else {
-          console.log(findFavorite);
           res.status(200).json({
             message: "this favorite character is already in the database",
           });
@@ -87,11 +83,10 @@ router.post("/favorites", isAuthenticated, async (req, res) => {
         if (searchFav === -1) {
           findFavorite.comics.push(req.body);
           findFavorite.markModified("comics");
-          console.log(findFavorite);
+
           await findFavorite.save();
           res.status(200).json(findFavorite);
         } else {
-          console.log(findFavorite);
           res.status(200).json({
             message: "this favorite comic is already in the database",
           });
@@ -122,7 +117,6 @@ router.delete("/favorites", isAuthenticated, async (req, res) => {
           res.status(200).json({ message: "the favorite character is delete" });
         }
       } else {
-        console.log("delete comics");
         const searchFav = findFavorite.comics.findIndex(
           (fav) => fav._id === req.query.comics
         );
