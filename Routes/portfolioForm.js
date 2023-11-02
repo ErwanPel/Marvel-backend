@@ -9,7 +9,7 @@ const client = mailgun.client({
   key: process.env.MAILGUN_KEY,
 });
 
-router.post("/portfolio/form", async (req, res) => {
+router.post("/portfolio", async (req, res) => {
   try {
     const { name, email, message } = req.body;
     console.log(req.body);
