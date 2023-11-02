@@ -10,6 +10,7 @@ const charactersRoute = require("./Routes/characters");
 const comicsRoute = require("./Routes/comics");
 const userRoutes = require("./Routes/user");
 const FavoriteRoutes = require("./Routes/favorites");
+const formPortfolioRoutes = require("./Routes/portfolioForm");
 
 app
   .use(express.json())
@@ -17,7 +18,8 @@ app
   .use(charactersRoute)
   .use(comicsRoute)
   .use(userRoutes)
-  .use(FavoriteRoutes);
+  .use(FavoriteRoutes)
+  .use(formPortfolioRoutes);
 
 app.get("/", (req, res) => {
   try {
