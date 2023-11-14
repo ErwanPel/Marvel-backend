@@ -16,6 +16,8 @@ Project Marvel - Backend
 
 
 ## Overview
+
+This project is a technical test carried out at the "Le Réacteur" bootcamp. This project respects a specification for the functionalities and total freedom for the aesthetic and interactive aspect of the site. 
  
 
 This project manages routes for :
