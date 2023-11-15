@@ -25,7 +25,7 @@ Project Marvel - Backend
 This project is a technical test carried out at the "Le Réacteur" bootcamp. This project respects a specification for the functionalities and total freedom for the aesthetic and interactive aspect of the site. 
  
 
-This project manages routes for :
+This project manages 10 routes for :
 
 1) user registration and connection.
 2) Get a list of 100 characters or comics per page, in alphabetical order.
@@ -33,9 +33,6 @@ This project manages routes for :
 4) Get a list of favorites.
 5) Add or remove an item from the favorites list.
 
-</br>
-
-Backend development uses Node.js and Express.js / MongoDB servers for database management (mongoose package). This server uses 10 routes to perform the above tasks.
 
 </br>
 This project uses the Marvel API of bootcamp "Le Reacteur" and requires an API key to obtain the characters and comics.
